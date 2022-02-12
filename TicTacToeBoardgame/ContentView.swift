@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var moves: [Move?] = Array(repeating: nil, count: 9)
-    
+    @State private var isGameboardDisabled: Bool = false
     
     let colums: [GridItem] = [
         GridItem(.flexible()),
@@ -52,15 +52,30 @@ struct ContentView: View {
                                 print("Draw")
                             }
                             
-                            //===========computer side=============
+//                            isGameboardDisabled = true
                             
+                            //===========computer side=============
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                let computerPosition = determineComputerMovePosition(in: moves)
+                                moves[computerPosition] = Move(player: .computer, boardIndex: computerPosition)
+                                
+                                isGameboardDisabled = false
+                                
+                                if checkWinCondition(for: .computer, in: moves){
+                                    print("You lose")
+                                    return
+                                }
+                                if checkForDraw(in: moves){
+                                    print("Draw")
+                                }
+                            }
                         }
                     }
                 }
                 
                 Spacer()
                 
-            }
+            }.disabled(isGameboardDisabled)
         }
         
         
@@ -83,6 +98,14 @@ struct ContentView: View {
     
     func checkForDraw(in moves: [Move?]) -> Bool{
         return moves.compactMap {$0}.count == 9
+    }
+    
+    func determineComputerMovePosition(in moves: [Move?]) -> Int{
+        var movePosition = Int.random(in: 0..<9)
+        while isSquareOcupied(in: moves, for: movePosition){
+            movePosition = Int.random(in: 0..<9)
+        }
+        return movePosition
     }
 }
 
