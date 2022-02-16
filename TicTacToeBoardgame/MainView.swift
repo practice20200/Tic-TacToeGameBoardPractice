@@ -18,7 +18,7 @@ struct MainView: View {
                     
                 SettingView()
                     .tabItem{
-                        Label("Board", systemImage: "gear")
+                        Label("Settings", systemImage: "gear")
                     }
                 
                 

@@ -12,19 +12,21 @@ struct ContentView: View {
     
     var body: some View {
         GeometryReader{ geometry in
-            VStack{
+            VStack(spacing: 36){
                 
                 Spacer()
+                
+                Text("Game")
                 
                 LazyVGrid(columns: viewModel.colums){
                     ForEach(0..<9) { i in
                         ZStack{
                             Circle()
                                 .foregroundColor(.blue).opacity(0.5)
-                                .frame(width: 80, height: 80)
+                                .frame(width: 100, height: 100)
                             Image(systemName: viewModel.moves[i]?.indicator ?? "")
                                 .resizable()
-                                .frame(width: 40, height: 40, alignment: .center)
+                                .frame(width: 50, height: 50, alignment: .center)
                                 .foregroundColor(.white)
                         }.onTapGesture {
                             viewModel.processPlayerMove(for: i)

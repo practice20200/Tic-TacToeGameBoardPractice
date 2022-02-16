@@ -9,7 +9,31 @@ import SwiftUI
 
 struct SettingView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        List{
+            Section{
+                SettingItemView(title: "Level")
+                SettingItemView(title: "Model")
+            }
+            
+            Section{
+                SettingItemView(title: "Language")
+                SettingItemView(title: "FAQ")
+                SettingItemView(title: "About us")
+            }
+        }
+    }
+}
+
+struct SettingItemView: View{
+    var title: String
+    var body: some View {
+        NavigationLink{
+            Text("title")
+                
+        } label: {
+            Text(title)
+        }
     }
 }
 
