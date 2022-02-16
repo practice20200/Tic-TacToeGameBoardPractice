@@ -50,7 +50,7 @@ struct ContentView: View {
                             // check whether the game ended in a draw
                             if checkForDraw(in: moves){
                                 print("Draw")
-                            }
+                            } 
                             
 //                            isGameboardDisabled = true
                             
